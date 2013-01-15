@@ -1,0 +1,64 @@
+
+#obszar
+{
+width: 600px;
+height: 600px;
+background-color: rgba(60,20,200,0.7);
+filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr='#4c3c14c8', endColorstr='#4c3c14c8'); /* IE */
+padding: 5px;
+margin-top: 2px;
+}
+#obszar p
+{
+text-align: center;
+color: #ffffff;
+font-family: Arial;
+}
+.puzel
+{
+width: 60px;
+height: 60px;
+background: url(./image/i_back_t.jpg);
+-moz-background-size: cover;
+-webkit-background-size: cover;
+background-size: cover;
+background-repeat: no-repeat;
+-moz-border-radius: 15px;
+border-radius: 15px;
+margin: 5px;
+}
+.puzel:hover
+{
+opacity: 0.7;
+}
+#ustawienia
+{
+width: 600px;
+height: 40px;
+background-color: rgba(60,20,200,1);
+padding: 5px;
+}
+#ustawienia p
+{
+text-align: center;
+color: #ffffff;
+font-family: Arial;
+}
+#ustpanel
+{
+width: 600px;
+height: 70px;
+background-color: rgba(60,20,200,1);
+padding: 5px;
+text-align: center;
+display: none;
+}
+#ustpanel p
+{
+color: #ffffff;
+font-family: Arial;
+}
+#ilesl
+{
+width: 70px;
+}
