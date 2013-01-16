@@ -59,6 +59,7 @@ display: none;
 {
 color: #ffffff;
 font-family: Arial;
+
 }
 #ilesl
 {
@@ -92,7 +93,7 @@ box-shadow: rgba(0,0,0,.4) 0 1px 0;
 }
 #nav button:hover
 {
-   background: rgba(60,20,200,1);
+   background: #3e779d;
    color: #ccc;
    border-color: #28597a;
 }
