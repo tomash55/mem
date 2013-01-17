@@ -15,13 +15,13 @@ min: 4,
 max: 20,
 step: 2,
 slide: function( event, ui ) {
-			$( "#amount" ).val( "$" + ui.value );
+			$( "#amount" ).val( ui.value );
 			wielkoscPlanszy=ui.value;
 			$("#obszar table").empty();
 			initMem();
 		}
 	});
-	$( "#amount" ).val( "$" + $( "#slider" ).slider( "value" ) );
+	$( "#amount" ).val( $( "#slider" ).slider( "value" ) );
 	wielkoscPlanszy=parseInt($( "#slider" ).slider( "value" ));
 });
 </script>
@@ -174,7 +174,7 @@ $(document).on( "click", ".puzel", function(){
 <div id="ustpanel">
 <p>
 <label for="amount">Wielkoœæ planszy:</label>
-<input type="text" id="amount" style="border: 0; color: #f6931f; font-weight: bold;" />
+<input type="text" id="amount" />
 </p>
 <div id="slider" style="width: 50%; align: center;"></div>
 </div>
