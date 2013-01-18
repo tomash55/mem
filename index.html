@@ -30,6 +30,15 @@ var tab = new Array();
 var statusTab = new Array();
 var ileKlik = 0;
 var lastKlik =0;
+var tStartStop=0;
+
+function czasMem()
+{
+	var currTime = new Date().getSeconds();
+	if(tStartStop!=0)
+		$("#time").html(currTime-tStartStop);
+}
+
 
 function initMem(size)
 {
@@ -39,6 +48,7 @@ function initMem(size)
 	statusTab.length=0;
 	ileKlik = 0;
 	lastKlik =0;
+	tStartStop =0;
 
 	for(var i=0;i<upPom;i++)
 	{
@@ -94,7 +104,10 @@ function rysuj()
 		}
 	});
 	if(czyKoniec)
+	{
 	alert("Gratulacje! Wygra³eœ!");
+	tStartStop = 0;
+	}
 }//rysuj
 
 $(document).ready(function(){
@@ -107,11 +120,16 @@ $(document).ready(function(){
 		$("#obszar table").empty();
 		initMem( $( "#amount" ).val() );
 	});
+	
+	setInterval(czasMem,1000);
 });
 
 $(document).on( "click", ".puzel", function(){
 	var inx = parseInt($(this).attr("name"));
 	ileKlik++;
+	
+	if(tStartStop==0)
+	tStartStop = new Date().getSeconds();
 	
 	if(ileKlik==1){
 		statusTab[inx]=1;
@@ -150,6 +168,7 @@ $(document).on( "click", ".puzel", function(){
 
 <div id="nav">
 <button id="start">Start</button>
+<p>Czas:<span id="time">0</span></p>
 </div>
 
 <div id="ustawienia">
