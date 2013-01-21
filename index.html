@@ -31,12 +31,15 @@ var statusTab = new Array();
 var ileKlik = 0;
 var lastKlik =0;
 var tStartStop=0;
+var bTime;
 
 function czasMem()
 {
 	var currTime = new Date().getSeconds();
-	if(tStartStop!=0)
-		$("#time").html(currTime-tStartStop);
+	if(bTime == 1)
+	{
+		$("#time").html((currTime-tStartStop));
+	}
 }
 
 
@@ -49,6 +52,7 @@ function initMem(size)
 	ileKlik = 0;
 	lastKlik =0;
 	tStartStop =0;
+	bTime = 0;
 
 	for(var i=0;i<upPom;i++)
 	{
@@ -105,8 +109,9 @@ function rysuj()
 	});
 	if(czyKoniec)
 	{
-	alert("Gratulacje! Wygra³eœ!");
-	tStartStop = 0;
+		alert("Gratulacje! Wygra³eœ!");
+		//tStartStop = 0;
+		bTime = 2;
 	}
 }//rysuj
 
@@ -126,30 +131,38 @@ $(document).ready(function(){
 
 $(document).on( "click", ".puzel", function(){
 	var inx = parseInt($(this).attr("name"));
-	ileKlik++;
 	
-	if(tStartStop==0)
-	tStartStop = new Date().getSeconds();
+	if(bTime == 0)
+	{
+		tStartStop = new Date().getSeconds();
+		bTime = 1;
+	}
 	
-	if(ileKlik==1){
-		statusTab[inx]=1;
-		lastKlik = inx;
-		rysuj();
-	} else if(ileKlik==2){
-		if(tab[lastKlik]==tab[inx] && inx!=lastKlik){
-			statusTab[lastKlik]=2;
-			statusTab[inx]=2;
-			rysuj();
-		} else {
+	if(statusTab[inx]!=2)
+	{
+		ileKlik++;
+		if(ileKlik==1)
+		{
 			statusTab[inx]=1;
+			lastKlik = inx;
 			rysuj();
-			statusTab[lastKlik]=0;
-			statusTab[inx]=0;
-			setTimeout(function()
-			{rysuj();}, 2000);
-			
+		} else if(ileKlik==2)
+		{
+			if(tab[lastKlik]==tab[inx] && inx!=lastKlik){
+				statusTab[lastKlik]=2;
+				statusTab[inx]=2;
+				rysuj();
+			} else {
+				statusTab[inx]=1;
+				rysuj();
+				statusTab[lastKlik]=0;
+				statusTab[inx]=0;
+				setTimeout(function()
+				{rysuj();}, 2000);
+				
+			}
+			ileKlik=0;
 		}
-		ileKlik=0;
 	}
 });
 </script>
