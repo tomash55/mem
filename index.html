@@ -35,10 +35,10 @@ var bTime;
 
 function czasMem()
 {
-	var currTime = new Date().getSeconds();
+	var currTime = new Date();
 	if(bTime == 1)
 	{
-		$("#time").html((currTime-tStartStop));
+		$("#time").html(parseInt((currTime-tStartStop)/1000));
 	}
 }
 
@@ -134,7 +134,7 @@ $(document).on( "click", ".puzel", function(){
 	
 	if(bTime == 0)
 	{
-		tStartStop = new Date().getSeconds();
+		tStartStop = new Date();
 		bTime = 1;
 	}
 	
