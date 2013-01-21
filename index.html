@@ -9,12 +9,13 @@
 <script>
 $(function() {
 	$( "#slider" ).slider({
-range: "min",
-value: 12,
-min: 4,
-max: 20,
-step: 2,
-slide: function( event, ui ) {
+		range: "min",
+		value: 12,
+		min: 4,
+		max: 20,
+		step: 2,
+		slide: function( event, ui )
+		{
 			$( "#amount" ).val( ui.value );
 			$("#obszar table").empty();
 			initMem(ui.value);
@@ -31,12 +32,11 @@ var statusTab = new Array();
 var ileKlik = 0;
 var lastKlik =0;
 var tStartStop=0;
-var bTime;
 
 function czasMem()
 {
 	var currTime = new Date();
-	if(bTime == 1)
+	if(tStartStop != 0)
 	{
 		$("#time").html(parseInt((currTime-tStartStop)/1000));
 	}
@@ -52,7 +52,6 @@ function initMem(size)
 	ileKlik = 0;
 	lastKlik =0;
 	tStartStop =0;
-	bTime = 0;
 
 	for(var i=0;i<upPom;i++)
 	{
@@ -110,8 +109,7 @@ function rysuj()
 	if(czyKoniec)
 	{
 		alert("Gratulacje! Wygra³eœ!");
-		//tStartStop = 0;
-		bTime = 2;
+		tStartStop = 0;
 	}
 }//rysuj
 
@@ -132,10 +130,9 @@ $(document).ready(function(){
 $(document).on( "click", ".puzel", function(){
 	var inx = parseInt($(this).attr("name"));
 	
-	if(bTime == 0)
+	if(tStartStop == 0)
 	{
 		tStartStop = new Date();
-		bTime = 1;
 	}
 	
 	if(statusTab[inx]!=2)
