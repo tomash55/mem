@@ -80,7 +80,8 @@ height: 40px;
 background-color: rgba(60,20,200,1);
 padding: 15px 0px 0px 15px;
 text-align: left;
-vertical-align: middle; 
+vertical-align: middle;
+position: relative;
 }
 #start
 {
@@ -96,6 +97,7 @@ vertical-align: middle;
 	letter-spacing:1px;
 	border-radius: 100%;
 	padding: 10px 5px 10px 5px;
+	float: left;
 }
 #start:hover
 {
@@ -113,4 +115,16 @@ vertical-align: middle;
 	color: #f6931f;
 	font-weight: bold;
 	background-color: rgba(60,20,200,1);
+}
+#nav p
+{
+	color: white;
+	position: absolute;
+	right: 25px;
+	top: 5px;
+	font-family: Verdana,Arial;
+}
+#nav span
+{
+	color: #f6931f;
 }
