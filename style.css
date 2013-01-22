@@ -57,16 +57,32 @@ vertical-align: middle;
 #ustpanel
 {
 width: 600px;
-height: 70px;
+height: 85px;
 background-color: rgba(60,20,200,1);
 padding: 5px;
 text-align: center;
 display: none;
 }
-#ustpanel p
+.bokl
 {
 color: #ffffff;
 font-family: Verdana, Arial;
+float: left;
+width: 50%;
+}
+.bokp
+{
+color: #ffffff;
+font-family: Verdana, Arial;
+float: right;
+width: 50%;
+}
+.bokl p, .bokp p
+{
+margin-left: auto;
+margin-right: auto;
+font-size: 14px;
+font-family: Verdana;
 }
 #slider
 {
@@ -114,6 +130,7 @@ position: relative;
 	color: #f6931f;
 	font-weight: bold;
 	background-color: rgba(60,20,200,1);
+	width: 20px;
 }
 #nav p
 {
