@@ -33,6 +33,20 @@ var ileKlik = 0;
 var lastKlik =0;
 var tStartStop=0;
 
+function createCookie(name, value)
+{
+	document.cookie = name+"="+value+"; path=/";
+}
+function readCookie(name)
+{
+	var nameC = name+"=";
+	var allCookies = document.cookie.split(';');	
+	for(var i=0;i<allCookies.length;i++)
+	{
+		alert(allCookies[i]);
+	}
+}
+
 function czasMem()
 {
 	var currTime = new Date();
@@ -129,6 +143,8 @@ $(document).ready(function(){
 
 $(document).on( "click", ".puzel", function(){
 	var inx = parseInt($(this).attr("name"));
+	createCookie("data","dziœ");
+	readCookie("data");
 	
 	if(tStartStop == 0)
 	{
