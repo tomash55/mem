@@ -7,6 +7,11 @@
 </script>
 
 <script>
+//TODO
+//gratulacje na infoBox
+//organize css!
+//js to sepetare file
+//cookies for chrome
 $(function() {
 	$( "#slider" ).slider({
 		range: "min",
@@ -55,22 +60,25 @@ function readCookie(name)
 }//readCookie
 function readCookies()
 {
+	var wynik = new Array();
 	var listaWynikow = "Najlepsze wyniki:\n";
 	for(var i=4;i<=20;i=i+2)
 	{
 		var wartC = readCookie(i);
 		if(wartC)
 		{
+			wynik.push(i+":"+wartC);
 			listaWynikow+=wartC+"\n";
 		}
 		else
 		{
 			createCookie(i,"Anonim:99999");
-			listaWynikow+=(i+"=Anonim:99999\n");
+			//listaWynikow+=(i+"=Anonim:99999\n");
+			wynik.push(i+":"+"Anonim:99999");
 		}
 	}
-	initWyniki();
-	//alert(listaWynikow);
+	initWyniki(wynik);
+	alert(listaWynikow);
 }//readCookies
 
 function czasMem()
@@ -82,8 +90,9 @@ function czasMem()
 	}
 }
 
-function initWyniki()
+function initWyniki(wynik)
 {
+	$(".infoBox").empty();
 	var pom = $(".infoBox").append($("<table></table>"));
 	var pomHead = ($("<tr></tr>"));
 	pomHead.append(($("<th></th>")).html("Rozmiar"));
@@ -93,24 +102,15 @@ function initWyniki()
 	
 	for(var i=0;i<5;i++)
 	{
+		var wynRozmiar = wynik[i].split(":");
 		var pRow=$("<tr></tr>");
 		for(var j=0;j<3;j++)
 		{
-			pRow.append($("<td></td>").html("2"));
-			//.append($("<p></p>").text("2"));
+			pRow.append($("<td></td>").html(wynRozmiar[j]));
 		}
 		pom.append(pRow);
 	}
 	pom.addClass("infoBoxTable");
-	/*
-	var pom = $(".infoBox").append($("<table></table>"));
-	var pRow=$("<tr></tr>");
-	pRow.append($("<td></td>"))
-	.append($("<p></p>").text("t"));
-			
-	pom.append(pRow);
-	*/
-	//pom.append($("<p>dsfsfs</p>"));
 }//initWyniki
 
 function initMem(size)
@@ -182,7 +182,7 @@ function rysuj()
 		var wynik = readCookie(parseInt( $( "#amount" ).val() ));
 		createCookie(
 						parseInt( $( "#amount" ).val() ),
-						parseInt( $( "#time" ).html() )
+						$( "#imie" ).val() + ":" + $( "#time" ).html()
 					);
 		tStartStop = 0;
 	}
