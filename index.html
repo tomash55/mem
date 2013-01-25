@@ -40,12 +40,38 @@ function createCookie(name, value)
 function readCookie(name)
 {
 	var nameC = name+"=";
-	var allCookies = document.cookie.split(';');	
+	var allCookies = document.cookie.split(';');
+	//alert(allCookies);
 	for(var i=0;i<allCookies.length;i++)
 	{
-		alert(allCookies[i]);
+		var c = allCookies[i];
+		if(c.charAt(0)==" ")
+			c = c.substring(1,c.length);
+		if(c.indexOf(nameC)==0)
+		{
+			return c.substring(nameC.length,c.length);
+		}
 	}
-}
+}//readCookie
+function readCookies()
+{
+	var listaWynikow = "Najlepsze wyniki:\n";
+	for(var i=4;i<=20;i=i+2)
+	{
+		var wartC = readCookie(i);
+		if(wartC)
+		{
+			listaWynikow+=wartC+"\n";
+		}
+		else
+		{
+			createCookie(i,"Anonim:99999");
+			listaWynikow+=(i+"=Anonim:99999\n");
+		}
+	}
+	initWyniki();
+	//alert(listaWynikow);
+}//readCookies
 
 function czasMem()
 {
@@ -56,6 +82,36 @@ function czasMem()
 	}
 }
 
+function initWyniki()
+{
+	var pom = $(".infoBox").append($("<table></table>"));
+	var pomHead = ($("<tr></tr>"));
+	pomHead.append(($("<th></th>")).html("Rozmiar"));
+	pomHead.append(($("<th></th>")).html("Imiê"));
+	pomHead.append(($("<th></th>")).html("Czas"));
+	pom.append(pomHead);
+	
+	for(var i=0;i<5;i++)
+	{
+		var pRow=$("<tr></tr>");
+		for(var j=0;j<3;j++)
+		{
+			pRow.append($("<td></td>").html("2"));
+			//.append($("<p></p>").text("2"));
+		}
+		pom.append(pRow);
+	}
+	pom.addClass("infoBoxTable");
+	/*
+	var pom = $(".infoBox").append($("<table></table>"));
+	var pRow=$("<tr></tr>");
+	pRow.append($("<td></td>"))
+	.append($("<p></p>").text("t"));
+			
+	pom.append(pRow);
+	*/
+	//pom.append($("<p>dsfsfs</p>"));
+}//initWyniki
 
 function initMem(size)
 {
@@ -123,6 +179,11 @@ function rysuj()
 	if(czyKoniec)
 	{
 		alert("Gratulacje! Wygra³eœ!");
+		var wynik = readCookie(parseInt( $( "#amount" ).val() ));
+		createCookie(
+						parseInt( $( "#amount" ).val() ),
+						parseInt( $( "#time" ).html() )
+					);
 		tStartStop = 0;
 	}
 }//rysuj
@@ -134,17 +195,23 @@ $(document).ready(function(){
 	});
 
 	$("#start").click(function(){
+		$(".infoBox").slideUp();
+		$("#obszar table").delay(500).fadeIn();
 		$("#obszar table").empty();
 		initMem( $( "#amount" ).val() );
 	});
 	
+	$("#wyniki").click(function(){
+		createCookie("data","dzis");
+		readCookies();
+		$("#obszar table").fadeOut();
+		$(".infoBox").delay(500).slideDown();
+	});
+	
 	setInterval(czasMem,1000);
 });
-
 $(document).on( "click", ".puzel", function(){
 	var inx = parseInt($(this).attr("name"));
-	createCookie("data","dziœ");
-	readCookie("data");
 	
 	if(tStartStop == 0)
 	{
@@ -188,12 +255,14 @@ $(document).on( "click", ".puzel", function(){
 <body>
 
 <div id="obszar">
+<div class="infoBox"></div>
 <table>
 </table>
 </div>
 
 <div id="nav">
-<button id="start">Start</button>
+<button class="roundB" id="start">Start</button>
+<button class="roundB" id="wyniki">Wyniki</button>
 <p>Czas: <span id="time">0</span></p>
 </div>
 
