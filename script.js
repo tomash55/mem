@@ -26,6 +26,7 @@ $(document).ready(function(){
 	$("#wyniki").click(function(){
 		createCookie("data","dzis");
 		readCookies();
+		tStartStop=0;
 		$("#obszarGry").fadeOut();
 		$("#infoBox").delay(500).slideDown();
 		$("#infoBox table").slideDown();
@@ -139,7 +140,10 @@ function initWyniki(wynik)
 {
 	$("#infoBox table").empty();
 	var pom = $("#infoBox table");
-	var pomHead = ($("<tr></tr>"));
+	var pomHead = ( ($("<caption></caption>")).html("Najlepsze wyniki") );
+	//pomHead.append(($("<th></th>")).html("Najlepsze wyniki"));
+	pom.append(pomHead);
+	pomHead = ($("<tr></tr>"));
 	pomHead.append(($("<th></th>")).html("Rozmiar"));
 	pomHead.append(($("<th></th>")).html("Imię"));
 	pomHead.append(($("<th></th>")).html("Czas"));
