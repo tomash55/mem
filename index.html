@@ -12,6 +12,7 @@
 //organize css!
 //js to sepetare file
 //cookies for chrome
+//save best score only
 $(function() {
 	$( "#slider" ).slider({
 		range: "min",
@@ -61,14 +62,14 @@ function readCookie(name)
 function readCookies()
 {
 	var wynik = new Array();
-	var listaWynikow = "Najlepsze wyniki:\n";
+	//var listaWynikow = "Najlepsze wyniki:\n";
 	for(var i=4;i<=20;i=i+2)
 	{
 		var wartC = readCookie(i);
 		if(wartC)
 		{
 			wynik.push(i+":"+wartC);
-			listaWynikow+=wartC+"\n";
+			//listaWynikow+=wartC+"\n";
 		}
 		else
 		{
@@ -78,7 +79,7 @@ function readCookies()
 		}
 	}
 	initWyniki(wynik);
-	alert(listaWynikow);
+	//alert(listaWynikow);
 }//readCookies
 
 function czasMem()
@@ -100,13 +101,20 @@ function initWyniki(wynik)
 	pomHead.append(($("<th></th>")).html("Czas"));
 	pom.append(pomHead);
 	
-	for(var i=0;i<5;i++)
+	for(var i=0;i<wynik.length;i++)
 	{
 		var wynRozmiar = wynik[i].split(":");
 		var pRow=$("<tr></tr>");
 		for(var j=0;j<3;j++)
 		{
-			pRow.append($("<td></td>").html(wynRozmiar[j]));
+			if(j==2)
+			{
+				pRow.append($("<td></td>").html(wynRozmiar[j]+" s"));
+			}
+			else
+			{
+				pRow.append($("<td></td>").html(wynRozmiar[j]));
+			}
 		}
 		pom.append(pRow);
 	}
@@ -178,17 +186,29 @@ function rysuj()
 	});
 	if(czyKoniec)
 	{
-		alert("Gratulacje! Wygra³eœ!");
-		var wynik = readCookie(parseInt( $( "#amount" ).val() ));
-		createCookie(
+		tStartStop = 0;
+		//alert("Gratulacje! Wygra³eœ!");
+		var oldWynik = readCookie( parseInt( $( "#amount" ).val() ));
+		oldWynik = oldWynik.split(":");//name on [0], score on [1] 
+		var wynik = parseInt( $( "#time" ).html() );
+		if(wynik<oldWynik[1])
+		{
+			alert("Najlepszy wynik!");
+			createCookie(
 						parseInt( $( "#amount" ).val() ),
 						$( "#imie" ).val() + ":" + $( "#time" ).html()
 					);
-		tStartStop = 0;
+		}
+		/*var pom = oldWynik.split(":");
+		alert(pom[1]);
+		var wynik = $( "#time" ).html();
+		*/
+		
 	}
 }//rysuj
 
 $(document).ready(function(){
+
 
 	$("#ustawienia").click(function(){
 		$("#ustpanel").slideToggle();
@@ -207,7 +227,7 @@ $(document).ready(function(){
 		$("#obszar table").fadeOut();
 		$(".infoBox").delay(500).slideDown();
 	});
-	
+	readCookies();
 	setInterval(czasMem,1000);
 });
 $(document).on( "click", ".puzel", function(){
