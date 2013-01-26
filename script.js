@@ -4,6 +4,7 @@
 //js to sepetare file
 //cookies for chrome
 //save best score only
+//stop elapsing time when wyniki
 var tab = new Array();
 var statusTab = new Array();
 var ileKlik = 0;
@@ -16,17 +17,18 @@ $(document).ready(function(){
 	});
 	
 	$("#start").click(function(){
-		$(".infoBox").slideUp();
-		$("#obszar table").delay(500).fadeIn();
-		$("#obszar table").empty();
+		$("#infoBox").slideUp();
+		$("#obszarGry").delay(500).fadeIn();
+		$("#obszarGry").empty();
 		initMem( $( "#amount" ).val() );
 	});
 	
 	$("#wyniki").click(function(){
 		createCookie("data","dzis");
 		readCookies();
-		$("#obszar table").fadeOut();
-		$(".infoBox").delay(500).slideDown();
+		$("#obszarGry").fadeOut();
+		$("#infoBox").delay(500).slideDown();
+		$("#infoBox table").slideDown();
 	});
 	
 	$( "#slider" ).slider({
@@ -38,7 +40,7 @@ $(document).ready(function(){
 		slide: function( event, ui )
 		{
 			$( "#amount" ).val( ui.value );
-			$("#obszar table").empty();
+			$("#obszarGry").empty();
 			initMem(ui.value);
 		}
 	});
@@ -135,8 +137,8 @@ function czasMem()
 
 function initWyniki(wynik)
 {
-	$(".infoBox").empty();
-	var pom = $(".infoBox").append($("<table></table>"));
+	$("#infoBox table").empty();
+	var pom = $("#infoBox table");
 	var pomHead = ($("<tr></tr>"));
 	pomHead.append(($("<th></th>")).html("Rozmiar"));
 	pomHead.append(($("<th></th>")).html("Imię"));
@@ -160,7 +162,7 @@ function initWyniki(wynik)
 		}
 		pom.append(pRow);
 	}
-	pom.addClass("infoBoxTable");
+	//pom.addClass("infoBoxTable");
 }//initWyniki
 
 function initMem(size)
@@ -195,7 +197,7 @@ function initMem(size)
 	var iloscWierszy=Math.floor(Math.sqrt(upPom));
 	for(var i=0;i<iloscWierszy;i++)
 	{
-		var pom = $("#obszar table");
+		var pom = $("#obszarGry");
 		var pRow=$("<tr></tr>");
 		for(var j=0;j<Math.ceil(upPom/iloscWierszy);j++){
 			if( (i*Math.ceil(upPom/iloscWierszy)+j) < upPom ){

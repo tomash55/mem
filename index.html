@@ -11,8 +11,10 @@
 	</head>
 	<body>
 		<div id="obszar">
-			<div class="infoBox"></div>
+			<div id="infoBox">
 			<table></table>
+			</div>
+			<table id="obszarGry"></table>
 		</div>
 		<div id="nav">
 			<button class="roundB" id="start">Start</button>
@@ -20,23 +22,23 @@
 			<p>Czas: <span id="time">0</span></p>
 		</div>
 
-		<div id="ustawienia">
+		<div class="ustawienia" id="ustawienia">
 			<p>Ustawienia</p>
 		</div>
 
-		<div id="ustpanel">
-			<div class="bokl">
+		<div class="ustawienia" id="ustpanel">
+			<div class="bok lewy">
 				<p>
 					<label for="imie">Imiê</label>
 				</p>
 				<input type="text" id="imie" value="Lala">
 			</div>
-			<div class="bokp">
+			<div class="bok prawy">
 				<p>
 					<label for="amount">Wielkoœæ planszy </label>
 					<input type="text" id="amount" />
 				</p>
-				<div id="slider" style="width: 50%; align: center;"></div>
+				<div id="slider"></div>
 			</div>
 		</div>
 	</body>
