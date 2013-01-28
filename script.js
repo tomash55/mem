@@ -5,6 +5,7 @@
 //cookies for chrome
 //save best score only
 //stop elapsing time when wyniki
+//cookies reset after re-open browser
 var tab = new Array();
 var statusTab = new Array();
 var ileKlik = 0;
