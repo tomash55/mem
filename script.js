@@ -17,14 +17,14 @@ $(document).ready(function(){
 		$("#ustpanel").slideToggle();
 	});
 	
-	$("#start").click(function(){
+	$("#start").on('click',function(){
 		$("#infoBox").slideUp();
 		$("#obszarGry").delay(500).fadeIn();
 		$("#obszarGry").empty();
 		initMem( $( "#amount" ).val() );
 	});
 	
-	$("#wyniki").click(function(){
+	$("#wyniki").on('click',function(){
 		createCookie("data","dzis");
 		readCookies();
 		tStartStop=0;
